@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Web Form Example</title>
+	<meta charset="UTF-8">
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+	<style>
+		body {
+			margin-top: 20px;
+		}
+
+		.txt-center {
+			text-align:center;
+		}
+	</style>
+	<script>
+		document.addEventListener("DOMContentLoaded", function() {
+			var inputForm = document.querySelector("#frm1");
+
+			inputForm
+				.addEventListener("submit", checkForm);
+
+			function checkForm(event) {
+				event.preventDefault();
+
+				var formFields = document.querySelectorAll("#frm1 input");
+
+				for (var i = 0; i < formFields.length; i++) {
+					var thisField = formFields[i];
+
+					//Check for blank entries
+					if (thisField.value === "") {
+						alert("Please fill in all fields");
+						return;
+					}
+
+					if (thisField.getAttribute("id") === "cc") {
+						var ccPattern = /^[0-9]{16}$/;
+						if (ccPattern.test(thisField.value)) {
+							continue;
+						} else {
+							alert("Please enter a valid credit card number");
+							return;
+						}
+					}
+
+					if (thisField.getAttribute("id") === "exp") {
+						var expPattern = /^[0,1][0-9][/][1,2][0-9]$/;
+						if (expPattern.test(thisField.value)) {
+							continue;
+						} else {
+							alert("Please enter a expiration date remember / between month and day");
+							return;
+						}
+					}
+
+					if (thisField.getAttribute("id") === "inputDateOfBirth") {
+						var bdayPattern = /^[0,1][0-9][/][0-3][0-9][/][1,2][0-9][0-9][0-9]$/;
+						if (bdayPattern.test(thisField.value)) {
+							continue;
+						} else {
+							alert("Please enter a valid birthday mm/dd/yyyy with /");
+							return;
+						}
+					}
+
+					if (thisField.getAttribute("id") === "security") {
+						var securityPattern = /^(?=.*[0-9]).{3}$/;
+						if (securityPattern.test(thisField.value)) {
+							continue;
+						} else {
+							alert("Please enter a vald 3 digit security code");
+							return;
+						}
+					}
+
+					if (thisField.getAttribute("id") === "firstName") {
+						var firstNamePattern = /^[A-Z][a-z].{2,}$/;
+						if (firstNamePattern.test(thisField.value)) {
+							continue;
+						} else {
+							alert("Please enter a valid first name!");
+							return;
+						}
+					}
+
+					if (thisField.getAttribute("id") === "lastName") {
+						var lastNamePattern = /^[A-Z][a-z].{2,}$/;
+						if (lastNamePattern.test(thisField.value)) {
+							continue;
+						} else {
+							alert("Please enter a valid last name!");
+							return;
+						}
+					}
+
+					if (thisField.getAttribute("id") === "zipcode") {
+						var zipCodePattern = /^(?=.*[0-9]).{5}$/;
+						if (zipCodePattern.test(thisField.value)) {
+							continue;
+						} else {
+							alert("Please enter a valid 5 digit zip code!");
+							return;
+						}
+					}
+
+					if (thisField.getAttribute("id") === "password") {
+						var passPattern = /^(?=.*[a-zA-Z])(?=.*[0-9]).{6,}$/;
+
+						if (passPattern.test(thisField.value)) {
+							continue;
+						} else {
+							alert("Please enter a valid password \n Your password must contain at least 6 characters and a number");
+								return;
+						}
+					}
+				}
+
+				alert("Thanks for submitting!");
+				inputForm.reset();
+			}
+		});
+	</script>
+</head>
+<body>
+	<div class="container well">
+		<form class="form-horizontal" id="frm1">
+		  <div class="form-group">
+		    <label for="inputName" class="col-sm-2 control-label">First Name:</label>
+		    <div class="col-sm-10">
+		      <input type="text" class="form-control" id="firstName" placeholder="Bob">
+		    </div>
+		  </div>
+		  <div class="form-group">
+		    <label for="inputName" class="col-sm-2 control-label">Last Name:</label>
+		    <div class="col-sm-10">
+		      <input type="text" class="form-control" id="lastName" placeholder="Smith">
+		    </div>
+		  </div>
+		  <div class="form-group">
+		  	<label for="inputAddress" class="col-sm-2 control-label">Address:</label>
+		  	<div class="col-sm-10">
+		  		<input  type="text" class="form-control" id="inputAddress" placeholder="80 Sutter St. San Francisco, CA 94140">
+		  	</div>
+		  </div>
+		  <div class="form-group">
+		    <label for="inputEmail3" class="col-sm-2 control-label">Email:</label>
+		    <div class="col-sm-10">
+		      <input type="email" class="form-control" id="iputEmail3" placeholder="bsmith12@gmail.com">
+		    </div>
+	  	</div>
+		  <div class="form-group">
+		    <label for="inputPassword3" class="col-sm-2 control-label">Password:</label>
+		    <div class="col-sm-10">
+		      <input type="password" class="form-control" id="password" placeholder="goBears1">
+		    </div>
+		  </div>
+		  <div class="form-group">
+		    <label for="date" class="col-sm-2 control-label">Date of Birth:</label>
+		    <div class="col-sm-10">
+		      <input type="text" class="form-control" id="inputDateOfBirth" placeholder="mm/dd/yyyy">
+		    </div>
+		  </div>
+		  <div class="form-group">
+		    <label for="inputCC" class="col-sm-2 control-label">Credit Card Number:</label>
+		    <div class="col-sm-10">
+		      <input type="text" class="form-control" id="cc" placeholder="1234123412341234">
+		    </div>
+		  </div>
+		  <div class="form-group">
+		    <label for="inputExp" class="col-sm-2 control-label">Expiration Date:</label>
+		    <div class="col-sm-10">
+		      <input type="text" class="form-control" id="exp" placeholder="01/17">
+		    </div>
+		  </div>
+		  <div class="form-group">
+		  	<label for="input3Digit" class="col-sm-2 control-label">3 Digit Security Code:</label>
+		  	<div class="col-sm-10">
+		  		<input type="text" class="form-control" id="security" placeholder="123">
+		  	</div>
+		  </div>
+		  	<div class="form-group">
+		  	<label for="inputZipCode" class="col-sm-2 control-label">Zip Code:</label>
+		  	<div class="col-sm-10">
+		  		<input type="text" class="form-control" id="zipcode" placeholder="94502">
+		  	</div>
+		  </div>
+		  <div class="txt-center">
+		  	<button type="submit" class="btn btn-primary">Submit</button>
+				<button type="reset" class="btn btn-primary">Reset</button>
+			</div>
+		</form>
+	</div>
+</body>
+</html>
